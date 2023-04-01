@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Vegetable Disease Detection - Tomato and Corn</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+    <header>
+        <h1>Vegetable Disease Detection</h1>
+        <h2>Currently for Tomato and Corn</h2>
+    </header>
+    <main>
+        <form method="POST" enctype="multipart/form-data">
+            <b><label for="image">Upload an image of Tomato or Corn leaf</label></b>
+            <br>
+            <input type="file" id="image" name="image" accept="image/*" required>
+            <button type="submit">Detect</button>
+        </form>
+        {% with messages = get_flashed_messages() %} {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+            <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %} {% endwith %} {% if plant %}
+        <div class="result">
+            <img src="{{ url_for('static', filename='uploads/' + filename) }}"> {% if plant =="unclear" %}
+            <p>Unable to detect plant disease</p>
+            <p>Kindly upload another image of the leaf.</p>
+
+            {% elif plant %}
+            <p>Plant: {{ plant }}</p>
+            <p>Disease Prediction: {{ disease }}</p>
+            {% endif %}
+        </div>
+        {% endif %}
+    </main>
+</body>
+
+</html>

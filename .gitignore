@@ -1,0 +1,3 @@
+vegenv/
+.env
+__pycache__/
