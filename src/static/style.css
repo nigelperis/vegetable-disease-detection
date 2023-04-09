@@ -1,41 +1,102 @@
-/* Global styles */
+:root {
+    --clr-neon: hsl(288, 51%, 48%);
+    --clr-bg: hsl(295, 33%, 36%);
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
 
 body {
-    background-color: #f5deb3;
+    background: #ecc987 url("corn.jpg") center/cover;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     margin: 0;
+    opacity: 0.88;
 }
 
 
 /* Header styles */
 
 header {
-    background-color: #3c8f3c;
+    background: #3c8f3c;
     color: #fff;
     padding: 20px;
     position: relative;
     z-index: 1;
+    text-align: center;
+    font: 4rem "Montserrat", sans-serif;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    transition: background-color 0.3s ease;
+}
+
+header:hover {
+    background: #1abc9c;
 }
 
 header::before {
-    content: '';
+    content: "";
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(to bottom, rgba(102, 192, 102, 0.8), rgba(91, 165, 91, 0.4));
+    background: linear-gradient( to bottom, rgba(102, 192, 102, 0.8), rgba(91, 165, 91, 0.4));
     z-index: -1;
 }
 
-header h1 {
-    font-size: 3rem;
+header h1,
+header h2 {
+    font-size: 4rem;
     margin: 0;
+    text-shadow: 2px #ffc0cb, 4px 4px #87ceeb;
 }
 
 header h2 {
     font-size: 2rem;
-    margin: 0;
+}
+
+
+/* detect button styles */
+
+.det {
+    font-size: 1.3rem;
+    display: inline-block;
+    cursor: pointer;
+    text-decoration: none;
+    color: var(--clr-neon);
+    border: var(--clr-neon) 0.125em solid;
+    padding: 0.25em 1em;
+    border-radius: 0.25em;
+    text-shadow: 0 0 0.125em hsla(132, 19%, 11%, 0.3), 0 0 0.45em currentColor;
+    box-shadow: inset 0 0 0.5em 0 var(--clr-neon), 0 0 0.5em 0 var(--clr-neon);
+    position: relative;
+}
+
+.det::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    box-shadow: 0 0 2em 0.5em var(--clr-neon);
+    opacity: 0;
+    background-color: var(--clr-neon);
+    z-index: -1;
+    transition: opacity 100ms linear;
+}
+
+.det:hover,
+.det:focus {
+    color: var(--clr-bg);
+    text-shadow: none;
+}
+
+.det:hover::after,
+.det:focus::after {
+    opacity: 1;
 }
 
 
@@ -43,14 +104,19 @@ header h2 {
 
 main {
     max-width: 800px;
-    margin: 0 auto;
+    margin: 50px auto 0;
     padding: 20px;
-    background-color: #fff;
+    background: #fff;
+    border: 1.5px solid #adf3b8;
     border-radius: 10px;
-    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
     position: relative;
     z-index: 0;
-    margin-top: 50px;
+    transition: all 0.3s ease;
+}
+
+main:hover {
+    transform: scale(1.02);
 }
 
 form {
@@ -58,6 +124,10 @@ form {
     flex-direction: column;
     align-items: center;
     margin-bottom: 20px;
+}
+
+form:hover {
+    transform: scale(1.05);
 }
 
 label {
@@ -70,37 +140,27 @@ input[type="file"] {
     font-size: 1.2rem;
     margin-bottom: 20px;
     padding: 10px;
-    background-color: rgba(255, 255, 255, 0.8);
+    background: rgba(255, 255, 255, 0.8);
     border-radius: 10px;
     border: 1px solid rgba(0, 0, 0, 0.2);
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
     transition: box-shadow 0.3s ease-in-out;
 }
 
+
+/* Input styles */
+
+input[type="file"] {
+    background-color: #fff0f5;
+    border: 2px solid #00ff26;
+}
+
 input[type="file"]:hover {
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
 }
 
-button[type="submit"] {
-    background-color: #4CAF50;
-    border: none;
-    color: #fff;
-    cursor: pointer;
-    font-size: 1.2rem;
-    padding: 10px 20px;
-    transition: background-color 0.3s;
-    border-radius: 10px;
-    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
-}
 
-button[type="submit"]:hover {
-    background-color: #3e8e41;
-}
-
-.messages {
-    list-style: none;
-    padding: 0;
-}
+/* Result container styles */
 
 .result {
     background-color: rgba(255, 255, 255, 0.8);
@@ -116,10 +176,16 @@ button[type="submit"]:hover {
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
 }
 
+
+/* Result image styles */
+
 .result img {
     max-width: 100%;
     border-radius: 10px;
 }
+
+
+/* Result title styles */
 
 .result p {
     font-weight: bold;
@@ -127,5 +193,14 @@ button[type="submit"]:hover {
     margin: 10px 0;
     text-transform: uppercase;
     letter-spacing: 2px;
-    font-family: 'Montserrat', sans-serif;
+    font-family: "Montserrat", sans-serif;
+}
+
+
+/* Modified Result container styles */
+
+.result.mod {
+    background-color: #fff0f5;
+    border-radius: 20px;
+    border: 2px solid #ff69b4;
 }
