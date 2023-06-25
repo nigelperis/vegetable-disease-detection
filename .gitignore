@@ -1,3 +1,4 @@
 vegenv/
 .env
 __pycache__/
+*.pyc
