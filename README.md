@@ -57,4 +57,3 @@ This project aims to classify Tomato and Corn Images to 12 diseases and idenitfy
 ## Website
 
 Flask web app built using HTML frontend where user can upload images and get the classificaiton results <br>
-Demo Website : https://vegetable-disease-detection-production.up.railway.app/
